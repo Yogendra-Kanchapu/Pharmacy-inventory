@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}
+Edit Stock Item
+{% endblock %}
+{% block content %}
+        <h1>Edit Stock Item Record</h1>
+        {% for row in rows %}
+        <form action="{{ url_for('editrec') }}" method="POST">
+            <h3 style="color:blue">Stock ID: {{ row['rowid']}}</h3>
+            <input type="hidden" name="rowid" value="{{ row['rowid'] }}">
+
+            Product Name<br>
+            <input type="text" name="product" value="{{ row['Product'] }}"/><br>
+
+            Category<br>
+            <input type="text" name="category" value="{{ row['Category'] }}"/><br>
+
+            Quantity<br>
+            <input type="number" name="quantity" value="{{ row['Quantity'] }}"/><br>
+
+            Price<br>
+            <input type="number" name="price" step="0.01" value="{{ row['Price'] }}"/><br>
+
+            <input type="submit" value="Update Record" /><br>
+        </form>
+        {% endfor %}
+{% endblock %}

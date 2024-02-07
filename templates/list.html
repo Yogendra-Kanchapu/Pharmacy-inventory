@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}
+List All Stock Items
+{% endblock %}
+{% block content %}
+<table border="1px">
+    <thead>
+        <td><strong>Item ID</strong></td>
+        <td><strong>Product</strong></td>
+        <td><strong>Category</strong></td>
+        <td><strong>Quantity</strong></td>
+        <td><strong>Price</strong></td>
+        <td></td>
+        <td></td>
+    </thead>
+
+    {% for row in rows %}
+    <tr>
+        <td>{{ row["rowid"] }}</td>
+        <td>{{ row["Product"] }}</td>
+        <td>{{ row["Category"]}}</td>
+        <td>{{ row["Quantity"] }}</td>
+        <td>{{ row["Price"] }}</td>
+        <td><form action="{{url_for('edit')}}" method="POST"><input type="hidden" name="id" value="{{ row['rowid'] }}"><input type="submit" value="Edit"></form> </td>
+        <td><form onsubmit="return confirm('Are you sure you want to DELETE this item from the Inventory?');" action="{{url_for('delete')}}" method="POST"><input type="hidden" name="id" value="{{ row['rowid'] }}"><input type="submit" value="Delete"></form> </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
